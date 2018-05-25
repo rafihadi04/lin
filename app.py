@@ -90,8 +90,31 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     text = event.message.text
-
-    if text == 'profile':
+    template_conf=ConfirmTemplate(text='Udah makan?', actions=[
+        MessageTemplateAction(label='Udah', text='makan_sudah'),
+        MessageTemplateAction(label='Belom', text='makan_belom')
+    ]
+    )
+    if text.lower() == 'halo':
+        line_bot_api.reply_message(
+            event.reply_token, [
+            TextSendMessage(
+                text='Halo juga!!'
+            ),
+            TemplateSendMessage(
+                alt_text='Udah makan?', template=template_conf
+            )
+            ]
+        )
+    elif text=='makan_sudah':
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text='Alhamdulillah, sudah makan.')
+        )
+    elif text=='makan_belom':
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text='Kuy makan !!')
+        )
+    '''if text == 'profile':
         if isinstance(event.source, SourceUser):
             profile = line_bot_api.get_profile(event.source.user_id)
             line_bot_api.reply_message(
@@ -176,9 +199,10 @@ def handle_text_message(event):
         line_bot_api.reply_message(event.reply_token, template_message)
     elif text == 'imagemap':
         pass
+    '''
     else:
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=event.message.text))
+            event.reply_token, TextSendMessage(text='Tidak ada perintah'))
 
 
 @handler.add(MessageEvent, message=LocationMessage)
