@@ -114,6 +114,9 @@ def handle_text_message(event):
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text='Kuy makan !!')
         )
+    else:
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text='Tidak ada perintah'))
     '''if text == 'profile':
         if isinstance(event.source, SourceUser):
             profile = line_bot_api.get_profile(event.source.user_id)
@@ -200,9 +203,6 @@ def handle_text_message(event):
     elif text == 'imagemap':
         pass
     '''
-    else:
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text='Tidak ada perintah'))
 
 
 @handler.add(MessageEvent, message=LocationMessage)
