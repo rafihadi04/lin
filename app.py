@@ -114,6 +114,14 @@ def handle_text_message(event):
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text='Kuy makan !!')
         )
+    elif text=='joox_help':
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text='[Joox Help]\nKetik joox nama_lagu\nKetik angka\nJika batal, ketik 99')
+        )
+    elif text=='yt_help':
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text='[YouTube Help]\nKetik yt.video nama_lagu')
+        )
     else:
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text='Tidak ada perintah'))
